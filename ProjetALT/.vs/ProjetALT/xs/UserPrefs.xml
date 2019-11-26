@@ -1,13 +1,18 @@
 ﻿<Properties StartupConfiguration="{E333A7BA-18A9-4EAF-B94D-36E4A0CC3623}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjetALT/MainPage.xaml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ProjetALT.Android/MainActivity.cs">
     <Files>
       <File FileName="ProjetALT/MainPage.xaml.cs" Line="1" Column="1" />
-      <File FileName="ProjetALT/MainPage.xaml" Line="1" Column="1" />
+      <File FileName="ProjetALT/MainPage.xaml" Line="7" Column="15" />
+      <File FileName="ProjetALT.Android/MainActivity.cs" Line="34" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="ProjetALT" expanded="True" selected="True" />
+          <Node name="ProjetALT" expanded="True">
+            <Node name="ProjetALT.Android" expanded="True">
+              <Node name="MainActivity.cs" selected="True" />
+            </Node>
+          </Node>
         </State>
       </Pad>
     </Pads>
