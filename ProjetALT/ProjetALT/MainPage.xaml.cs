@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
+using System.IO;
+using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Json;
+using ProjetALT.src;
+using Newtonsoft.Json;
 
 namespace ProjetALT
 {
@@ -16,6 +19,25 @@ namespace ProjetALT
         public MainPage()
         {
             InitializeComponent();
+
+            string url = "https://hmin309-embedded-systems.herokuapp.com/message-exchange/messages/";
+            WebRequest request = WebRequest.Create(url);
+            WebResponse response = request.GetResponse();
+            Stream stream = response.GetResponseStream();
+            Encoding encode = Encoding.GetEncoding("utf-8");
+
+            List<Message> messages;
+
+            using (StreamReader translatedStream = new StreamReader(stream, encode))
+            {
+                string line;
+
+                while ((line = translatedStream.ReadLine()) != null)
+                {
+                    messages = JsonConvert.DeserializeObject<List<Message>>(line);
+                }
+            }
+
         }
     }
 }
