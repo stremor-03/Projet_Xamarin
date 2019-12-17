@@ -18,8 +18,6 @@ namespace ProjetALT
     {
         public MainPage()
         {
-            InitializeComponent();
-
             string url = "https://hmin309-embedded-systems.herokuapp.com/message-exchange/messages/";
             WebRequest request = WebRequest.Create(url);
             WebResponse response = request.GetResponse();
