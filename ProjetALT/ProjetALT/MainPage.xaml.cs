@@ -26,7 +26,7 @@ namespace ProjetALT
             Stream stream = response.GetResponseStream();
             Encoding encode = Encoding.GetEncoding("utf-8");
 
-            List<Message> messages = new List<Message>();
+            List<Message> messages;
 
             using (StreamReader translatedStream = new StreamReader(stream, encode))
             {
@@ -38,7 +38,6 @@ namespace ProjetALT
                 }
             }
 
-            Console.WriteLine(messages[0]);
         }
     }
 }
