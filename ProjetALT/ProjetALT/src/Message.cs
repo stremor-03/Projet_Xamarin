@@ -46,5 +46,11 @@ namespace ProjetALT.src
         {
             return Id + " : ("+Gps_lat+";"+Gps_long+")\t[" + Student_id + "]" + Student_message;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Message message &&
+                   Id == message.Id;
+        }
     }
 }

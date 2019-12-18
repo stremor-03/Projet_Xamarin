@@ -20,5 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="src\EmptyClass.cs" />
+    <Compile Remove="src\MessageComparer.cs" />
   </ItemGroup>
 </Project>
