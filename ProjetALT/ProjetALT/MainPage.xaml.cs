@@ -22,7 +22,7 @@ namespace ProjetALT
 
         public MainPage()
         {
-            messages = getMessages();
+            getMessages();
 
             var button = new Button
             {
@@ -31,16 +31,7 @@ namespace ProjetALT
             };
             button.Clicked += (sender, e) =>
             {
-                List<Message> newValues = getMessages().ToList();
-                List<Message> oldValue = messages.ToList();
-
-                foreach (Message message in newValues)
-                {
-                    if (!messages.Contains(message))
-                    {
-                        messages.Insert(0, message);
-                    }
-                }
+                getMessages();
 
                 Console.WriteLine("Refesh cliked => "+this.messages.Count);
             };
@@ -100,7 +91,7 @@ namespace ProjetALT
             };
         }
 
-        private ObservableCollection<Message> getMessages()
+        private void getMessages()
         {
             string url = "https://hmin309-embedded-systems.herokuapp.com/message-exchange/messages/";
             WebRequest request = WebRequest.Create(url);
@@ -109,6 +100,13 @@ namespace ProjetALT
             Encoding encode = Encoding.GetEncoding("utf-8");
 
             ObservableCollection<Message> result = null;
+
+            int size = messages.Count;
+            bool firstRun = true; 
+
+            if (size > 0) {
+                firstRun = false;
+            }
 
             using (StreamReader translatedStream = new StreamReader(stream, encode))
             {
@@ -120,7 +118,16 @@ namespace ProjetALT
                 }
             }
 
-            return result;
+
+            foreach (Message message in result.ToList())
+            {
+                if (!messages.Contains(message))
+                {
+                    size = !firstRun ? 0 : messages.Count;
+                    messages.Insert(size,message);
+                    Console.WriteLine("new ID " + message.Id);
+                }
+            }
 
         }
     }
