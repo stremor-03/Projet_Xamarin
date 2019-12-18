@@ -22,7 +22,10 @@ namespace ProjetALT
 
         public MainPage()
         {
-            getMessages();
+            var timer = new System.Threading.Timer((e) =>
+            {
+                getMessages();
+            }, null, TimeSpan.Zero, TimeSpan.FromSeconds(4));
 
             var button = new Button
             {
@@ -129,6 +132,7 @@ namespace ProjetALT
                 }
             }
 
+            Console.WriteLine("Update !");
         }
     }
 }
