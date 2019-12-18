@@ -8,6 +8,8 @@ using Xamarin.Forms;
 using System.Json;
 using ProjetALT.src;
 using Newtonsoft.Json;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace ProjetALT
 {
@@ -16,32 +18,38 @@ namespace ProjetALT
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        ObservableCollection<Message> messages = new ObservableCollection<Message>();
+
         public MainPage()
         {
-            string url = "https://hmin309-embedded-systems.herokuapp.com/message-exchange/messages/";
-            WebRequest request = WebRequest.Create(url);
-            WebResponse response = request.GetResponse();
-            Stream stream = response.GetResponseStream();
-            Encoding encode = Encoding.GetEncoding("utf-8");
+            messages = getMessages();
 
-            List<Message> messages = null;
-
-            using (StreamReader translatedStream = new StreamReader(stream, encode))
+            var button = new Button
             {
-                string line;
+                Text = "Refresh button",
+                BackgroundColor = Color.Gray
+            };
+            button.Clicked += (sender, e) =>
+            {
+                List<Message> newValues = getMessages().ToList();
+                List<Message> oldValue = messages.ToList();
 
-                while ((line = translatedStream.ReadLine()) != null)
+                foreach (Message message in newValues)
                 {
-                    messages = JsonConvert.DeserializeObject<List<Message>>(line);
+                    if (!messages.Contains(message))
+                    {
+                        messages.Insert(0, message);
+                    }
                 }
-            }
+
+                Console.WriteLine("Refesh cliked => "+this.messages.Count);
+            };
 
             // Create the ListView.
             ListView listView = new ListView
             {
                 // Source of data items.
-                ItemsSource = messages,
-
+                ItemsSource = this.messages,
                 // Define template for displaying each item.
                 // (Argument of DataTemplate constructor is called for 
                 //      each item; it must return a Cell derivative.)
@@ -71,11 +79,10 @@ namespace ProjetALT
                 })
             };
 
-
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
-                    this.Padding = new Thickness(10, 20, 10, 5);
+                    this.Padding = new Thickness(10, 50, 10, 5);
                     break;
                 default:
                     this.Padding = new Thickness(10, 0, 10, 5);
@@ -87,9 +94,34 @@ namespace ProjetALT
             {
                 Children =
                 {
+                    button,
                     listView
                 }
             };
+        }
+
+        private ObservableCollection<Message> getMessages()
+        {
+            string url = "https://hmin309-embedded-systems.herokuapp.com/message-exchange/messages/";
+            WebRequest request = WebRequest.Create(url);
+            WebResponse response = request.GetResponse();
+            Stream stream = response.GetResponseStream();
+            Encoding encode = Encoding.GetEncoding("utf-8");
+
+            ObservableCollection<Message> result = null;
+
+            using (StreamReader translatedStream = new StreamReader(stream, encode))
+            {
+                string line;
+
+                while ((line = translatedStream.ReadLine()) != null)
+                {
+                    result = JsonConvert.DeserializeObject<ObservableCollection<Message>>(line);
+                }
+            }
+
+            return result;
+
         }
     }
 }
