@@ -26,8 +26,10 @@ namespace ProjetALT
             setView();
         }
 
+        // Set the view of the first page
         private void setView()
         {
+            // Button to ask a refresh of data
             var button = new Button
             {
                 Text = "Refresh button",
@@ -46,9 +48,11 @@ namespace ProjetALT
 
                 ItemTemplate = new DataTemplate(() =>
                 {
+                    // Label for student id
                     Label studentIDLabel = new Label();
                     studentIDLabel.SetBinding(Label.TextProperty, "Student_id");
 
+                    // Label for the message
                     Label messageLabel = new Label();
                     messageLabel.SetBinding(Label.TextProperty, "Student_message");
 
@@ -90,11 +94,13 @@ namespace ProjetALT
             };
         }
 
+        // Auto data refresh each 'second'
         private void setRefreshAuto(int second)
         {
             _ = new System.Threading.Timer((e) => getMessages(), null, TimeSpan.Zero, TimeSpan.FromSeconds(second));
         }
 
+        // Collect data from the server and store it in 'messages'
         private void getMessages()
         {
             string url = "https://hmin309-embedded-systems.herokuapp.com/message-exchange/messages/";
@@ -127,9 +133,8 @@ namespace ProjetALT
             {
                 if (!messages.Contains(message))
                 {
-                    size = !firstRun ? 0 : messages.Count;
-                    messages.Insert(size,message);
-                    Console.WriteLine("new ID " + message.Id);
+                    int index = !firstRun ? 0 : messages.Count;
+                    messages.Insert(index,message);
                 }
             }
 
