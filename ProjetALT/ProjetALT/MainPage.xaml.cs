@@ -22,11 +22,12 @@ namespace ProjetALT
 
         public MainPage()
         {
-            var timer = new System.Threading.Timer((e) =>
-            {
-                getMessages();
-            }, null, TimeSpan.Zero, TimeSpan.FromSeconds(4));
+            setRefreshAuto(5);
+            setView();
+        }
 
+        private void setView()
+        {
             var button = new Button
             {
                 Text = "Refresh button",
@@ -35,26 +36,21 @@ namespace ProjetALT
             button.Clicked += (sender, e) =>
             {
                 getMessages();
-
-                Console.WriteLine("Refesh cliked => "+this.messages.Count);
+                Console.WriteLine("Refesh cliked => " + this.messages.Count);
             };
 
             // Create the ListView.
             ListView listView = new ListView
             {
-                // Source of data items.
                 ItemsSource = this.messages,
-                // Define template for displaying each item.
-                // (Argument of DataTemplate constructor is called for 
-                //      each item; it must return a Cell derivative.)
+
                 ItemTemplate = new DataTemplate(() =>
                 {
-                    // Create views with bindings for displaying each property.
                     Label studentIDLabel = new Label();
                     studentIDLabel.SetBinding(Label.TextProperty, "Student_id");
 
                     Label messageLabel = new Label();
-                    messageLabel.SetBinding(Label.TextProperty,"Student_message");
+                    messageLabel.SetBinding(Label.TextProperty, "Student_message");
 
                     // Return an assembled ViewCell.
                     return new ViewCell
@@ -92,6 +88,11 @@ namespace ProjetALT
                     listView
                 }
             };
+        }
+
+        private void setRefreshAuto(int second)
+        {
+            _ = new System.Threading.Timer((e) => getMessages(), null, TimeSpan.Zero, TimeSpan.FromSeconds(second));
         }
 
         private void getMessages()
