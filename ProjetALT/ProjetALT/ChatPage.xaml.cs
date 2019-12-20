@@ -11,17 +11,26 @@ using Newtonsoft.Json;
 using ProjetALT.src;
 
 namespace ProjetALT
+
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MapPage : ContentPage
+    public partial class ChatPage : ContentPage
     {
         ObservableCollection<Message> messages = new ObservableCollection<Message>();
 
-        public MapPage()
+        public ChatPage()
         {
-			IconImageSource = "map.png";
-			Title = "Map";
+            IconImageSource = "chat_icon.png";
+            Title = "Chat";
 
+            setRefreshAuto(5);
+            setView();
+        }
+
+        // Set the view of the first page
+        private void setView()
+        {
+            // Button to ask a refresh of data
             var button = new Button
             {
                 Text = "Refresh button",
@@ -33,49 +42,57 @@ namespace ProjetALT
                 Console.WriteLine("Refesh cliked => " + this.messages.Count);
             };
 
-            Position position = new Position(43.6312, 3.861477);
-            MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
-
-            Map map = new Map(mapSpan);
-
-            foreach(Message message in messages)
+            // Create the ListView.
+            ListView listView = new ListView
             {
-                // Label for student id
-                Label studentIDLabel = new Label();
-                studentIDLabel.SetBinding(Label.TextProperty, "Student_id");
+                ItemsSource = this.messages,
 
-                // Label for the message
-                Label messageLabel = new Label();
-                messageLabel.SetBinding(Label.TextProperty, "Student_message");
-
-                Double gps_lat = message.Gps_lat;
-                Double gps_long = message.Gps_long;
-
-                Console.WriteLine("Lat : "+gps_lat+"/ Long : "+ gps_long);
-
-                Position pos = new Position(gps_lat, gps_long);
-
-
-                map.Pins.Add(new Pin
+                ItemTemplate = new DataTemplate(() =>
                 {
-                    Label = studentIDLabel.ToString(),
-                    Address = messageLabel.ToString(),
-                    Type = PinType.Place,
-                    Position = pos
-                });
-            }
+                    // Label for student id
+                    Label studentIDLabel = new Label();
+                    studentIDLabel.SetBinding(Label.TextProperty, "Student_id");
 
+                    // Label for the message
+                    Label messageLabel = new Label();
+                    messageLabel.SetBinding(Label.TextProperty, "Student_message");
 
-            Content = new StackLayout
-            {
-                Margin = new Thickness(10),
-                Children =
-                {
-                    map,
-                    button
-                }
+                    // Return an assembled ViewCell.
+                    return new ViewCell
+                    {
+                        View = new StackLayout
+                        {
+                            VerticalOptions = LayoutOptions.Center,
+                            Spacing = 0,
+                            Children =
+                            {
+                                studentIDLabel,
+                                messageLabel
+                            }
+                        }
+                    };
+                })
             };
 
+            switch (Device.RuntimePlatform)
+            {
+                case Device.iOS:
+                    this.Padding = new Thickness(10, 50, 10, 5);
+                    break;
+                default:
+                    this.Padding = new Thickness(10, 0, 10, 5);
+                    break;
+            }
+
+            // Build the page.
+            this.Content = new StackLayout
+            {
+                Children =
+                {
+                    button,
+                    listView
+                }
+            };
         }
 
         // Auto data refresh each 'second'

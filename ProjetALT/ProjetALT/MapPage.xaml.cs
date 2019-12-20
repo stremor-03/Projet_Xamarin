@@ -19,7 +19,7 @@ namespace ProjetALT
 
         public MapPage()
         {
-			IconImageSource = "map.png";
+			IconImageSource = "map_icon.png";
 			Title = "Map";
 
             var button = new Button
