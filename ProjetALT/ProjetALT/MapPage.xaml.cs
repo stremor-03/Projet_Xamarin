@@ -17,10 +17,12 @@ namespace ProjetALT
     {
         ObservableCollection<Message> messages = new ObservableCollection<Message>();
 
-        public MapPage()
+        public MapPage(ObservableCollection<Message> messages)
         {
-			IconImageSource = "map_icon.png";
-			Title = "Map";
+            this.messages = messages;
+
+            IconImageSource = "map_icon.png";
+            Title = "Map";
 
             var button = new Button
             {
@@ -29,8 +31,7 @@ namespace ProjetALT
             };
             button.Clicked += (sender, e) =>
             {
-                getMessages();
-                Console.WriteLine("Refesh cliked => " + this.messages.Count);
+                //getMessages();
             };
 
             Position position = new Position(43.6312, 3.861477);
@@ -38,7 +39,7 @@ namespace ProjetALT
 
             Map map = new Map(mapSpan);
 
-            foreach(Message message in messages)
+            foreach (Message message in this.messages)
             {
                 // Label for student id
                 Label studentIDLabel = new Label();
@@ -51,7 +52,7 @@ namespace ProjetALT
                 Double gps_lat = message.Gps_lat;
                 Double gps_long = message.Gps_long;
 
-                Console.WriteLine("Lat : "+gps_lat+"/ Long : "+ gps_long);
+                Console.WriteLine("Lat : " + gps_lat + "/ Long : " + gps_long);
 
                 Position pos = new Position(gps_lat, gps_long);
 
@@ -78,52 +79,5 @@ namespace ProjetALT
 
         }
 
-        // Auto data refresh each 'second'
-        private void setRefreshAuto(int second)
-        {
-            _ = new System.Threading.Timer((e) => getMessages(), null, TimeSpan.Zero, TimeSpan.FromSeconds(second));
-        }
-
-        // Collect data from the server and store it in 'messages'
-        private void getMessages()
-        {
-            string url = "https://hmin309-embedded-systems.herokuapp.com/message-exchange/messages/";
-            WebRequest request = WebRequest.Create(url);
-            WebResponse response = request.GetResponse();
-            Stream stream = response.GetResponseStream();
-            Encoding encode = Encoding.GetEncoding("utf-8");
-
-            ObservableCollection<Message> result = null;
-
-            int size = messages.Count;
-            bool firstRun = true;
-
-            if (size > 0)
-            {
-                firstRun = false;
-            }
-
-            using (StreamReader translatedStream = new StreamReader(stream, encode))
-            {
-                string line;
-
-                while ((line = translatedStream.ReadLine()) != null)
-                {
-                    result = JsonConvert.DeserializeObject<ObservableCollection<Message>>(line);
-                }
-            }
-
-
-            foreach (Message message in result.ToList())
-            {
-                if (!messages.Contains(message))
-                {
-                    int index = !firstRun ? 0 : messages.Count;
-                    messages.Insert(index, message);
-                }
-            }
-
-            Console.WriteLine("Update !");
-        }
     }
 }

@@ -16,14 +16,15 @@ namespace ProjetALT
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChatPage : ContentPage
     {
-        ObservableCollection<Message> messages = new ObservableCollection<Message>();
+        ObservableCollection<Message> messages;
 
-        public ChatPage()
+        public ChatPage(ObservableCollection<Message> messages)
         {
+            this.messages = messages;
+
             IconImageSource = "chat_icon.png";
             Title = "Chat";
 
-            setRefreshAuto(5);
             setView();
         }
 
@@ -38,8 +39,7 @@ namespace ProjetALT
             };
             button.Clicked += (sender, e) =>
             {
-                getMessages();
-                Console.WriteLine("Refesh cliked => " + this.messages.Count);
+                //getMessages();
             };
 
             // Create the ListView.
@@ -95,52 +95,5 @@ namespace ProjetALT
             };
         }
 
-        // Auto data refresh each 'second'
-        private void setRefreshAuto(int second)
-        {
-            _ = new System.Threading.Timer((e) => getMessages(), null, TimeSpan.Zero, TimeSpan.FromSeconds(second));
-        }
-
-        // Collect data from the server and store it in 'messages'
-        private void getMessages()
-        {
-            string url = "https://hmin309-embedded-systems.herokuapp.com/message-exchange/messages/";
-            WebRequest request = WebRequest.Create(url);
-            WebResponse response = request.GetResponse();
-            Stream stream = response.GetResponseStream();
-            Encoding encode = Encoding.GetEncoding("utf-8");
-
-            ObservableCollection<Message> result = null;
-
-            int size = messages.Count;
-            bool firstRun = true;
-
-            if (size > 0)
-            {
-                firstRun = false;
-            }
-
-            using (StreamReader translatedStream = new StreamReader(stream, encode))
-            {
-                string line;
-
-                while ((line = translatedStream.ReadLine()) != null)
-                {
-                    result = JsonConvert.DeserializeObject<ObservableCollection<Message>>(line);
-                }
-            }
-
-
-            foreach (Message message in result.ToList())
-            {
-                if (!messages.Contains(message))
-                {
-                    int index = !firstRun ? 0 : messages.Count;
-                    messages.Insert(index, message);
-                }
-            }
-
-            Console.WriteLine("Update !");
-        }
     }
 }
