@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Net;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Forms.Maps;
-using Newtonsoft.Json;
 using ProjetALT.src;
 
 namespace ProjetALT
@@ -24,6 +19,11 @@ namespace ProjetALT
             IconImageSource = "map_icon.png";
             Title = "Map";
 
+            CustomMap customMap = new CustomMap
+            {
+                MapType = MapType.Street
+            };
+
             var button = new Button
             {
                 Text = "Refresh button",
@@ -34,10 +34,12 @@ namespace ProjetALT
                 //getMessages();
             };
 
-            Position position = new Position(43.6312, 3.861477);
+            Position position = new Position(this.messages[0].Gps_lat, this.messages[0].Gps_long);
             MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
 
             Map map = new Map(mapSpan);
+
+            Double gps_lat, gps_long;
 
             foreach (Message message in this.messages)
             {
@@ -49,18 +51,21 @@ namespace ProjetALT
                 Label messageLabel = new Label();
                 messageLabel.SetBinding(Label.TextProperty, "Student_message");
 
-                Double gps_lat = message.Gps_lat;
-                Double gps_long = message.Gps_long;
+                var rand = new Random();
 
-                Console.WriteLine("Lat : " + gps_lat + "/ Long : " + gps_long);
+                Double random_num_lat = .00065 * rand.Next(1, 10);
+                Double random_num_lng = .00065 * rand.Next(1, 10);
+
+                gps_lat = message.Gps_lat + random_num_lat;
+                gps_long = message.Gps_long + random_num_lng;
 
                 Position pos = new Position(gps_lat, gps_long);
 
 
                 map.Pins.Add(new Pin
                 {
-                    Label = studentIDLabel.ToString(),
-                    Address = messageLabel.ToString(),
+                    Label = message.Student_message.ToString(),
+                    Address = message.Student_id.ToString(),
                     Type = PinType.Place,
                     Position = pos
                 });
