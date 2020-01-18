@@ -29,9 +29,10 @@ namespace ProjetALT
                 Text = "Refresh button",
                 BackgroundColor = Color.Gray
             };
+
             button.Clicked += (sender, e) =>
             {
-                //getMessages();
+                MainPage.refreshMessages();
             };
 
             Position position = new Position(this.messages[0].Gps_lat, this.messages[0].Gps_long);

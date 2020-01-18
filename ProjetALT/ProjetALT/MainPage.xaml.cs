@@ -16,7 +16,7 @@ namespace ProjetALT
 
         public MainPage()
         {
-            resfreshMessages();
+            refreshMessages();
             Children.Add(new ChatPage(messages));
             Children.Add(new MapPage(messages));
             setRefreshAuto(5);
@@ -25,11 +25,11 @@ namespace ProjetALT
         // Auto data refresh each 'second'
         private static void setRefreshAuto(int second)
         {
-            _ = new System.Threading.Timer((e) => resfreshMessages(), null, TimeSpan.Zero, TimeSpan.FromSeconds(second));
+            _ = new System.Threading.Timer((e) => refreshMessages(), null, TimeSpan.Zero, TimeSpan.FromSeconds(second));
         }
 
         // Collect data from the server and store it in 'messages'
-        private static void resfreshMessages()
+        public static void refreshMessages()
         {
             string url = "https://hmin309-embedded-systems.herokuapp.com/message-exchange/messages/";
             WebRequest request = WebRequest.Create(url);

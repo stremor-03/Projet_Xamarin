@@ -37,9 +37,10 @@ namespace ProjetALT
                 Text = "Refresh button",
                 BackgroundColor = Color.Gray
             };
+
             button.Clicked += (sender, e) =>
             {
-                //getMessages();
+                MainPage.refreshMessages();
             };
 
             // Create the ListView.
