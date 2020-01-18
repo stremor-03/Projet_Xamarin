@@ -8,7 +8,7 @@ namespace ProjetALT
     {
         public App()
         {
-            MainPage = new MainPage();
+            MainPage = new ProjetALT.MainPage();
         }
 
         protected override void OnStart()
