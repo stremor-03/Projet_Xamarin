@@ -18,24 +18,28 @@ namespace ProjetALT
     {
         ObservableCollection<Message> messages;
 
+        // Setting up title, icon (for the bottom Bar) and global background of the specific Chat page
         public ChatPage(ObservableCollection<Message> messages)
         {
             this.messages = messages;
 
             IconImageSource = "chat_icon.png";
-            Title = "Chat";
+            Title = "CHAT";
+            BackgroundColor = Color.FromHex("#1A1A1A");
 
             setView();
         }
 
-        // Set the view of the first page
+        // Set the View of the first Page (chat)
         private void setView()
         {
-            // Button to ask a refresh of data
+            // Creating a Button component to ask a Refresh of data (messages)
             var button = new Button
             {
-                Text = "Refresh button",
-                BackgroundColor = Color.Gray
+                Text = "Refresh",
+                TextColor = Color.AntiqueWhite,
+                BorderColor = Color.White,
+                BackgroundColor = Color.Black
             };
 
             button.Clicked += (sender, e) =>
@@ -53,10 +57,18 @@ namespace ProjetALT
                     // Label for student id
                     Label studentIDLabel = new Label();
                     studentIDLabel.SetBinding(Label.TextProperty, "Student_id");
+                    studentIDLabel.TextColor = Color.White;
+                    studentIDLabel.FontAttributes = FontAttributes.Bold;
+
+
 
                     // Label for the message
                     Label messageLabel = new Label();
                     messageLabel.SetBinding(Label.TextProperty, "Student_message");
+                    messageLabel.TextColor = Color.LightGray;
+                    studentIDLabel.FontSize = 20;
+                    studentIDLabel.FontFamily = "";
+
 
                     // Return an assembled ViewCell.
                     return new ViewCell
@@ -64,7 +76,9 @@ namespace ProjetALT
                         View = new StackLayout
                         {
                             VerticalOptions = LayoutOptions.Center,
-                            Spacing = 0,
+                            Spacing = 2,
+                            Padding = 2,
+                            BackgroundColor = Color.FromHex("#1A1A1A"),
                             Children =
                             {
                                 studentIDLabel,
@@ -74,6 +88,8 @@ namespace ProjetALT
                     };
                 })
             };
+
+            listView.BackgroundColor = Color.DimGray;
 
             switch (Device.RuntimePlatform)
             {

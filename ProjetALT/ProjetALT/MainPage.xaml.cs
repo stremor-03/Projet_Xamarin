@@ -14,11 +14,16 @@ namespace ProjetALT
     {
         static ObservableCollection<Message> messages = new ObservableCollection<Message>();
 
+        // Defines the refresh logic and add Chat and Map elements to the Bottom navigation bar
         public MainPage()
         {
             refreshMessages();
-            Children.Add(new ChatPage(messages));
             Children.Add(new MapPage(messages));
+            Children.Add(new ChatPage(messages));
+            BarTextColor = Color.AntiqueWhite;
+            BarBackgroundColor = Color.FromHex("#1A1A1A");
+            
+
             setRefreshAuto(5);
         }
 
