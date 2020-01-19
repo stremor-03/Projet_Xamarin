@@ -24,7 +24,22 @@ namespace ProjetALT.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsMaps.Init();
+
             LoadApplication(new App());
+
+            //Tried to change status bar color, seems to break the app (won't load after the splash screen)
+            /*
+            UIView statusBar = UIApplication.SharedApplication.ValueForKey(new NSString("statusBar")) as UIView;
+            if (statusBar.RespondsToSelector(new ObjCRuntime.Selector("setBackgroundColor:")))
+            {
+                statusBar.BackgroundColor = UIColor.Black;
+                statusBar.TintColor = UIColor.White;
+            }
+            */
+
+            UINavigationBar.Appearance.TintColor = UIColor.Purple;
+            UINavigationBar.Appearance.BarTintColor = UIColor.Purple;
+
 
             return base.FinishedLaunching(app, options);
         }

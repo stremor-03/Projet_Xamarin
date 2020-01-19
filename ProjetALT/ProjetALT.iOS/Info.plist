@@ -32,9 +32,13 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>ProjetALT</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We are using your location</string>
 	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/AppIcon.appiconset</string>
-  <key>NSLocationWhenInUseUsageDescription</key>
-  <string>We are using your location</string>
+	<string>Assets.xcassets/ALTIcon.appiconset</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
+	<key>UIViewControlledBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

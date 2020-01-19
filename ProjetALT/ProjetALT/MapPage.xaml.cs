@@ -17,17 +17,22 @@ namespace ProjetALT
             this.messages = messages;
 
             IconImageSource = "map_icon.png";
-            Title = "Map";
+            Title = "MAP";
+            BackgroundColor = Color.FromHex("#1A1A1A");
+
 
             CustomMap customMap = new CustomMap
             {
                 MapType = MapType.Street
             };
 
+            // Refresh Button
             var button = new Button
             {
-                Text = "Refresh button",
-                BackgroundColor = Color.Gray
+                Text = "Refresh",
+                TextColor = Color.AntiqueWhite,
+                BorderColor = Color.Azure,
+                BackgroundColor = Color.Black
             };
 
             button.Clicked += (sender, e) =>
@@ -39,6 +44,7 @@ namespace ProjetALT
             MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
 
             Map map = new Map(mapSpan);
+            map.HasZoomEnabled = true;
 
             Double gps_lat, gps_long;
 
@@ -62,7 +68,7 @@ namespace ProjetALT
 
                 Position pos = new Position(gps_lat, gps_long);
 
-
+                // Defining the Pin element of the map.
                 map.Pins.Add(new Pin
                 {
                     Label = message.Student_message.ToString(),
@@ -72,10 +78,10 @@ namespace ProjetALT
                 });
             }
 
-
+            // Creating new Layout and adding the map and refresh button to it
             Content = new StackLayout
             {
-                Margin = new Thickness(10),
+                Margin = new Thickness(20),
                 Children =
                 {
                     map,
