@@ -76,8 +76,7 @@ namespace ProjetALT
                         View = new StackLayout
                         {
                             VerticalOptions = LayoutOptions.Center,
-                            Spacing = 2,
-                            Padding = 2,
+                            Spacing = 1,
                             BackgroundColor = Color.FromHex("#1A1A1A"),
                             Children =
                             {
