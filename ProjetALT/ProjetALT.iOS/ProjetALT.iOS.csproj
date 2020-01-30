@@ -61,6 +61,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ToastIOS.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
@@ -111,59 +112,165 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\map_icon.png.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\map_icon.png.imageset\YZGvp40.png" />
-    <ImageAsset Include="Assets.xcassets\chat_icon.png.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\chat_icon.png.imageset\32.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\40.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\60.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\58.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\87.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\80.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\120.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\120-1.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\180.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\20.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\40-1.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\29.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\58-1.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\40-2.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\80-1.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\76.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\152.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\167.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\1024.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\120-2.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\180-1.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\48.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\55.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\58-2.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\87-1.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\80-2.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\88.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\100.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\172.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\196.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\216.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\1024-1.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\16.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\32.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\32-1.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\64.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\128.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\256.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\256-1.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\512.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\512-1.png" />
-    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\1024-2.png" />
-    <ImageAsset Include="Assets.xcassets\splash_icon.imageset\128.png" />
-    <ImageAsset Include="Assets.xcassets\splash_icon.imageset\196.png" />
-    <ImageAsset Include="Assets.xcassets\splash_icon.imageset\64.png" />
-    <ImageAsset Include="Assets.xcassets\splash_icon.imageset\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\splash_icon.imageset\256.png" />
-    <ImageAsset Include="Assets.xcassets\splash_icon.imageset\512.png" />
-    <ImageAsset Include="Assets.xcassets\splash_icon.imageset\1024.png" />
+    <ImageAsset Include="Assets.xcassets\map_icon.png.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\map_icon.png.imageset\YZGvp40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\chat_icon.png.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\chat_icon.png.imageset\32.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\60.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\58.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\87.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\80.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\120.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\120-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\180.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\20.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\40-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\29.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\58-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\40-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\80-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\152.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\167.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\1024.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\120-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\180-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\48.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\55.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\58-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\87-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\80-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\88.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\100.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\172.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\196.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\216.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\1024-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\16.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\32.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\32-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\64.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\128.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\256.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\256-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\512.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\512-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\ALTIcon.appiconset\1024-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\splash_icon.imageset\128.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\splash_icon.imageset\196.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\splash_icon.imageset\64.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\splash_icon.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\splash_icon.imageset\256.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\splash_icon.imageset\512.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\splash_icon.imageset\1024.png">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -197,11 +304,5 @@
       <Name>ProjetALT</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets.xcassets\map_icon.png.imageset\" />
-    <Folder Include="Assets.xcassets\chat_icon.png.imageset\" />
-    <Folder Include="Assets.xcassets\ALTIcon.appiconset\" />
-    <Folder Include="Assets.xcassets\ALTIcon.appiconset\" />
-    <Folder Include="Assets.xcassets\splash_icon.imageset\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

@@ -81,7 +81,6 @@ namespace ProjetALT
             // Creating new Layout and adding the map and refresh button to it
             Content = new StackLayout
             {
-                Margin = new Thickness(20),
                 Children =
                 {
                     map,

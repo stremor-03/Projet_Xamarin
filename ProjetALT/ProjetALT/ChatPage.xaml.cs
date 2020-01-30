@@ -21,6 +21,7 @@ namespace ProjetALT
         // Setting up title, icon (for the bottom Bar) and global background of the specific Chat page
         public ChatPage(ObservableCollection<Message> messages)
         {
+
             this.messages = messages;
 
             IconImageSource = "chat_icon.png";
@@ -30,22 +31,17 @@ namespace ProjetALT
             setView();
         }
 
+        void ShowMessageDetail(object sender, ItemTappedEventArgs e)
+        {
+            var position = e.Group;
+            var message = (Message)e.Item;
+           
+            Navigation.PushModalAsync(new NavigationPage (new MessageDetailPage(message, this.messages)) { BarBackgroundColor = Color.FromHex("#1A1A1A"), BarTextColor = Color.AntiqueWhite });
+        }
+
         // Set the View of the first Page (chat)
         private void setView()
         {
-            // Creating a Button component to ask a Refresh of data (messages)
-            var button = new Button
-            {
-                Text = "Refresh",
-                TextColor = Color.AntiqueWhite,
-                BorderColor = Color.White,
-                BackgroundColor = Color.Black
-            };
-
-            button.Clicked += (sender, e) =>
-            {
-                MainPage.refreshMessages();
-            };
 
             // Create the ListView.
             ListView listView = new ListView
@@ -59,16 +55,14 @@ namespace ProjetALT
                     studentIDLabel.SetBinding(Label.TextProperty, "Student_id");
                     studentIDLabel.TextColor = Color.White;
                     studentIDLabel.FontAttributes = FontAttributes.Bold;
-
-
+                    studentIDLabel.FontSize = 20;
+                    studentIDLabel.FontFamily = "";
 
                     // Label for the message
                     Label messageLabel = new Label();
                     messageLabel.SetBinding(Label.TextProperty, "Student_message");
                     messageLabel.TextColor = Color.LightGray;
-                    studentIDLabel.FontSize = 20;
-                    studentIDLabel.FontFamily = "";
-
+                    messageLabel.LineBreakMode = LineBreakMode.TailTruncation;
 
                     // Return an assembled ViewCell.
                     return new ViewCell
@@ -88,6 +82,15 @@ namespace ProjetALT
                 })
             };
 
+            listView.ItemTapped += ShowMessageDetail;
+            listView.IsPullToRefreshEnabled = true;
+            listView.RefreshCommand = new Command(() =>
+            {
+                MainPage.refreshMessages();
+                listView.IsRefreshing = false;
+                DependencyService.Get<IToast>().ShortAlert("Updated !");
+            });
+
             listView.BackgroundColor = Color.DimGray;
 
             switch (Device.RuntimePlatform)
@@ -105,7 +108,6 @@ namespace ProjetALT
             {
                 Children =
                 {
-                    button,
                     listView
                 }
             };
