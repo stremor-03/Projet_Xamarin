@@ -7,16 +7,19 @@ using System.Text;
 using Newtonsoft.Json;
 using ProjetALT.src;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace ProjetALT
 {
-    public partial class MainPage : TabbedPage
+    public partial class MainPage : Xamarin.Forms.TabbedPage
     {
         static ObservableCollection<Message> messages = new ObservableCollection<Message>();
 
         // Defines the refresh logic and add Chat and Map elements to the Bottom navigation bar
         public MainPage()
         {
+            On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
+
             refreshMessages();
             Children.Add(new MapPage(messages));
             Children.Add(new ChatPage(messages));
